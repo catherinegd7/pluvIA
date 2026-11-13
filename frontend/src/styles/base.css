@@ -1,0 +1,235 @@
+/* ============================================================
+   pluvIA · sistema visual
+   Concepto: señalización vial + ficha técnica de ingeniería urbana.
+   Concreto, asfalto y amarillo vial; azul solo para datos de agua.
+   ============================================================ */
+:root {
+  --font-display: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+  --font-body: 'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+
+  /* concreto y papel */
+  --bg: #ffffff;
+  --app-bg: #f5f5f3; /* fondo del panel: gris muy claro para que resalten las tarjetas blancas */
+  --surface: #ffffff;
+  --surface-2: #f5f5f3;
+  --surface-3: #ebebe8;
+  --ink: #111111;
+  --ink-2: #2e2e2c;
+  --ink-3: #6e6e69;
+  --line: #e3e3df;
+  --line-strong: #c4c4be;
+
+  /* asfalto */
+  --deep: #1a1a1a;
+  --deep-2: #232323;
+  --deep-3: #333333;
+  --deep-ink: #f2f2ef;
+  --deep-ink-2: #9a9a94;
+
+  /* amarillo vial (marca) */
+  --signal: #ffb21e; /* ámbar */
+  --signal-ink: #111111;
+
+  /* azul de agua (datos) */
+  --accent: #1766c9;
+  --accent-strong: #0f4c9c;
+  --accent-soft: #dbe7f6;
+  --accent-ink: #ffffff;
+
+  /* Escala de estado tomada del logo:
+     agua que fluye (menta) → señal preventiva (amarillo) → peligro (coral).
+     *-fill = relleno de barras/medidores · color base = texto e íconos */
+  --ok: #0b8577;
+  --ok-fill: #2ec4b0;
+  --ok-soft: #daf3ee;
+  --warn: #8a5600;
+  --warn-fill: #ffb21e;
+  --warn-soft: #fff0d4;
+  --crit: #d4294f;
+  --crit-fill: #ff4d6d;
+  --crit-soft: #ffe0e6;
+  --info: #1766c9;
+  --info-soft: #dbe7f6;
+  --muted: #77776f;
+  --muted-soft: #efefec;
+
+  --c-distancia: #1766c9;
+  --c-temperatura: #f0603c;
+  --c-humedad: #12a594;
+  --c-luz: #e39a00;
+  --c-presencia: #7c5cff;
+
+  /* series de gráficas (una por coladera) */
+  --serie-1: #1766c9;
+  --serie-2: #12b3a0;
+  --serie-3: #f0a000;
+  --serie-4: #7c5cff;
+  --serie-5: #ff4d6d;
+  --serie-6: #3a3a3a;
+
+  --radius: 3px;
+  --radius-sm: 2px;
+  --radius-lg: 4px;
+  --shadow-sm: none;
+  --shadow: 0 1px 0 rgb(20 21 22 / 0.04);
+  --shadow-lg: 0 18px 40px -18px rgb(20 21 22 / 0.35);
+
+  --sidebar: 244px;
+  color-scheme: light;
+}
+
+:root[data-theme='dark'] {
+  --bg: #111111;
+  --app-bg: #111111;
+  --surface: #181818;
+  --surface-2: #1b1c1e;
+  --surface-3: #242628;
+  --ink: #ebe8e1;
+  --ink-2: #b2aea5;
+  --ink-3: #7b7870;
+  --line: #2a2c2e;
+  --line-strong: #3c3e41;
+
+  --deep: #0b0b0b;
+  --deep-2: #161616;
+  --deep-3: #262626;
+
+  --accent: #5aa8f5;
+  --accent-strong: #8cc4fa;
+  --accent-soft: #13263f;
+  --accent-ink: #0e0f10;
+
+  --ok: #4fe0cb;
+  --ok-fill: #2ec4b0;
+  --ok-soft: #0f2f2b;
+  --warn: #ffc552;
+  --warn-fill: #ffb21e;
+  --warn-soft: #33250a;
+  --crit: #ff7a8f;
+  --crit-fill: #ff4d6d;
+  --crit-soft: #3a1520;
+  --info: #5aa8f5;
+  --info-soft: #13263f;
+  --muted: #7b7870;
+  --muted-soft: #242628;
+
+  --c-distancia: #5aa8f5;
+  --c-temperatura: #ff8a65;
+  --c-humedad: #4fe0cb;
+  --c-luz: #ffb21e;
+  --c-presencia: #a38bff;
+
+  --serie-1: #5aa8f5;
+  --serie-2: #4fe0cb;
+  --serie-3: #ffb21e;
+  --serie-4: #a38bff;
+  --serie-5: #ff7a8f;
+  --serie-6: #c9c5bc;
+
+  --shadow-lg: 0 18px 40px -18px rgb(0 0 0 / 0.7);
+  color-scheme: dark;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--ink);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  line-height: 1;
+  letter-spacing: -0.005em;
+  margin: 0;
+  font-weight: 700;
+}
+
+p {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+img,
+svg {
+  display: block;
+}
+
+.mono {
+  font-family: var(--font-mono);
+  font-size: 0.86em;
+  letter-spacing: 0;
+}
+
+.etiqueta-mono {
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--ink-3);
+}
+
+.num {
+  font-variant-numeric: tabular-nums;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+:focus-visible {
+  outline: 2px solid var(--signal);
+  outline-offset: 2px;
+}
+
+::selection {
+  background: var(--signal);
+  color: var(--signal-ink);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
